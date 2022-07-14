@@ -1,7 +1,9 @@
+import Quiz from "../quiz/Quiz";
+
 const QuizPage = () => {
     return (
         <>
-            Страница с викториной
+            <Quiz/>
         </>
     );
 };
