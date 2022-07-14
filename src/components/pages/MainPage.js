@@ -1,7 +1,9 @@
+import Start from "../start/Start";
+
 const MainPage = () => {
     return (
         <>
-            Главная страница
+            <Start/>
         </>
     );
 };
