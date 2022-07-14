@@ -12,7 +12,7 @@ html
     font-weight: 500
     font-size: 24px
     line-height: 36px
-    color: black
+    color: $metallicCopper
 
 body
     margin: 0
@@ -70,7 +70,7 @@ button
     width: 100%
     min-height: 100vh
     height: 100%
-    // background-color: $lightSteelBlue
+    background-color: $sandyBeach
 
 .container
     margin: 0 auto
@@ -81,25 +81,29 @@ button
 .section
     padding: 30px 0
 
-// .button
-//     padding: 5px 15px
-//     min-width: 130px
-//     border-radius: 5px
-//     transition: transform 0.2s, background-color 0.2s
-//     will-change: transform, background-color
-//     box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.2)
-//     @media (min-width: 992px)
-//         &:hover
-//             transform: scale(1.03)
-//         &:active
-//             opacity: 0.5
-//     &_light-steel-blue
-//         background-color: $lightSteelBlue
-//         @media (min-width: 992px)
-//             &:hover
-//                 background-color: $littleBoyBlue
-//         &_active
-//             background-color: $littleBoyBlue
+.button
+    padding: 5px 15px
+    min-width: 130px
+    text-align: center
+    color: $sandyBeach
+    background-color: $brownRust
+    border: 2px solid $brownRust
+    border-radius: 5px
+    transition: transform 0.2s, background-color 0.2s
+    will-change: transform, background-color
+    box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.2)
+    @media (min-width: 992px)
+        &:hover
+            transform: scale(1.03)
+        &:active
+            opacity: 0.5
+    &_test
+        // @media (min-width: 992px)
+        //     &:hover
+        //         color: $sandyBeach
+        //         background-color: $brownRust
+        &_active
+            // background-color: $littleBoyBlue
 
 // .input
 //     padding: 5px 15px
