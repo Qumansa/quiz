@@ -1,0 +1,28 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "indexNumber": 1,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta porro eaque aperiam cupiditate rerum debitis ex laborum saepe?",
+      "answers": [
+        "Ответ 1",
+        "Ответ 2",
+        "Ответ 3",
+        "Ответ 4"
+      ],
+      "correctAnswer": "Ответ 1"
+    },
+    {
+      "id": 1,
+      "indexNumber": 2,
+      "description": "Dicta porro eaque aperiam cupiditate rerum debitis ex laborum saepe?",
+      "answers": [
+        "Ответ 1",
+        "Ответ 2",
+        "Ответ 3",
+        "Ответ 4"
+      ],
+      "correctAnswer": "Ответ 2"
+    }
+  ]
+}
