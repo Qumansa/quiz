@@ -11,6 +11,7 @@ import './quiz.sass';
 const Quiz = () => {
     const [customError, setCustomError] = useState(false);
     const [currentQuestion, setCurrentQuestion] = useState(1);
+    const [amountOfCorrectAnswers, setAmountOfCorrectAnswers] = useState(0);
 
     const {
         data: question = {},
@@ -18,7 +19,7 @@ const Quiz = () => {
         isError,
     } = useGetQuestionQuery(currentQuestion);
 
-    const {indexNumber, description, answers} = question;
+    const {indexNumber, description, answers, correctAnswer} = question;
 
     const onReload = () => {
         window.location.reload();
@@ -26,6 +27,14 @@ const Quiz = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
+
+        if (e.target.answer.value === correctAnswer) {
+            setAmountOfCorrectAnswers(amountOfCorrectAnswers => amountOfCorrectAnswers + 1);
+
+            if (currentQuestion === 2) {
+                window.location.href = '/result';
+            }
+        };
 
         setCurrentQuestion(currentQuestion => currentQuestion + 1);
     };
@@ -63,13 +72,6 @@ const Quiz = () => {
                             Перезагрузить
                         </button>
                     </li>
-                    <li className="answers__buttons-item">
-                        <Link 
-                            className="button" 
-                            to="/">
-                            На главную
-                        </Link>
-                    </li>
                 </>
             : 
                 <>
@@ -91,6 +93,7 @@ const Quiz = () => {
                         <span className="question__text">
                             Вопрос <span className="question__number">{questionNumberView}</span>/10
                         </span>
+                        Количество правильных ответов: {amountOfCorrectAnswers}
                     </div>
                     {descriptionView}
                     <form 
@@ -104,6 +107,7 @@ const Quiz = () => {
                                     className="answers__radio sr-only"
                                     type="radio"
                                     name="answer"
+                                    value={getAnswerView(0)}
                                     required/>
                                 <label 
                                     className="answers__descr" 
@@ -118,6 +122,7 @@ const Quiz = () => {
                                     className="answers__radio sr-only"
                                     type="radio"
                                     name="answer"
+                                    value={getAnswerView(1)}
                                     required/>
                                 <label 
                                     className="answers__descr" 
@@ -132,6 +137,7 @@ const Quiz = () => {
                                     className="answers__radio sr-only"
                                     type="radio"
                                     name="answer"
+                                    value={getAnswerView(2)}
                                     required/>
                                 <label 
                                     className="answers__descr" 
@@ -146,6 +152,7 @@ const Quiz = () => {
                                     className="answers__radio sr-only"
                                     type="radio"
                                     name="answer"
+                                    value={getAnswerView(3)}
                                     required/>
                                 <label 
                                     className="answers__descr" 
@@ -155,6 +162,13 @@ const Quiz = () => {
                             </li>
                         </ul>
                         <ul className="answers__buttons">
+                            <li className="answers__buttons-item">
+                                <Link 
+                                    className="button" 
+                                    to="/">
+                                    На главную
+                                </Link>
+                            </li>
                             {buttonsView}
                         </ul>
                     </form>
@@ -163,11 +177,7 @@ const Quiz = () => {
         );
     };
 
-    return (
-        <>
-            <UI/>
-        </>
-    );
+    return <UI/>;
 };
 
 export default Quiz;

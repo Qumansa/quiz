@@ -13,9 +13,6 @@
             fill: $sandyBeach
     &__descr
         margin-top: 30px
-        // padding: 30px
-        // border: 2px solid $brownRust
-        // border-radius: 5px
 
 .answers
     margin-top: 50px
@@ -45,9 +42,10 @@
 
 .spinner-wrapper
     justify-content: flex-start
-    margin-top: 30px
 
-.question__counter + .error
-    margin-top: 30px
+.question__counter 
+    & + .error,
+    & + .spinner-wrapper
+        margin-top: 30px
 
 
