@@ -1,6 +1,7 @@
 import { useGetQuestionQuery } from '../../api/quizApi';
 
 import Spinner from '../spinner/Spinner';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import './quiz.sass';
 
@@ -15,16 +16,27 @@ const Quiz = () => {
 
     // const renderedAnswers = renderAnswers(answers);
 
+    const onSubmit = (e) => {
+        e.preventDefault();
+    };
+
     const UI = () => {
-        const questionNumberView = isLoading 
+        const questionNumberView = isLoading || isError 
             ? "-" 
             : indexNumber;
+
         const descriptionView = isLoading 
             ? <Spinner/> 
+            : isError 
+            ? <ErrorMessage/>
             : <p className="question__descr">{description}</p>;
 
         const getAnswerView = (index) => {
-            return isLoading ? "Загрузка..." : answers[index];
+            return isLoading 
+                ? "Загрузка..." 
+                : isError 
+                ? <ErrorMessage/>
+                : answers[index];
         };
 
         return (
@@ -39,7 +51,9 @@ const Quiz = () => {
                         </span>
                     </div>
                     {descriptionView}
-                    <form className="answers">
+                    <form 
+                        className="answers"
+                        onSubmit={onSubmit}>
                         <ul className="answers__list">
                             <li 
                                 className="answers__item">
@@ -47,7 +61,8 @@ const Quiz = () => {
                                     id="answer0"
                                     className="answers__radio sr-only"
                                     type="radio"
-                                    name="answer"/>
+                                    name="answer"
+                                    required/>
                                 <label 
                                     className="answers__descr" 
                                     htmlFor="answer0">
@@ -60,7 +75,8 @@ const Quiz = () => {
                                     id="answer1"
                                     className="answers__radio sr-only"
                                     type="radio"
-                                    name="answer"/>
+                                    name="answer"
+                                    required/>
                                 <label 
                                     className="answers__descr" 
                                     htmlFor="answer1">
@@ -73,7 +89,8 @@ const Quiz = () => {
                                     id="answer2"
                                     className="answers__radio sr-only"
                                     type="radio"
-                                    name="answer"/>
+                                    name="answer"
+                                    required/>
                                 <label 
                                     className="answers__descr" 
                                     htmlFor="answer2">
@@ -86,7 +103,8 @@ const Quiz = () => {
                                     id="answer3"
                                     className="answers__radio sr-only"
                                     type="radio"
-                                    name="answer"/>
+                                    name="answer"
+                                    required/>
                                 <label 
                                     className="answers__descr" 
                                     htmlFor="answer3">
