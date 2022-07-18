@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom'; 
+
 import { useGetQuestionQuery } from '../../api/quizApi';
 
 import Spinner from '../spinner/Spinner';
@@ -6,38 +9,77 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 import './quiz.sass';
 
 const Quiz = () => {
+    const [customError, setCustomError] = useState(false);
+    const [currentQuestion, setCurrentQuestion] = useState(1);
+
     const {
         data: question = {},
         isLoading,
         isError,
-    } = useGetQuestionQuery(1);
+    } = useGetQuestionQuery(currentQuestion);
 
     const {indexNumber, description, answers} = question;
 
-    // const renderedAnswers = renderAnswers(answers);
+    const onReload = () => {
+        window.location.reload();
+    };
 
     const onSubmit = (e) => {
         e.preventDefault();
+
+        setCurrentQuestion(currentQuestion => currentQuestion + 1);
     };
 
     const UI = () => {
-        const questionNumberView = isLoading || isError 
+        const questionNumberView = isLoading || isError || customError
             ? "-" 
             : indexNumber;
 
         const descriptionView = isLoading 
             ? <Spinner/> 
-            : isError 
+            : isError || customError
             ? <ErrorMessage/>
             : <p className="question__descr">{description}</p>;
 
         const getAnswerView = (index) => {
             return isLoading 
                 ? "Загрузка..." 
-                : isError 
+                : isError || customError
                 ? <ErrorMessage/>
-                : answers[index];
+                : answers[index]
+                ? answers[index] 
+                : setCustomError(true);
         };
+
+        const buttonsView = isLoading 
+            ? <Spinner/>  
+            : isError || customError
+            ? 
+                <>
+                    <li className="answers__buttons-item">
+                        <button 
+                            className="button"
+                            onClick={onReload}>
+                            Перезагрузить
+                        </button>
+                    </li>
+                    <li className="answers__buttons-item">
+                        <Link 
+                            className="button" 
+                            to="/">
+                            На главную
+                        </Link>
+                    </li>
+                </>
+            : 
+                <>
+                    <li className="answers__buttons-item">
+                        <button className="button">Пропустить</button>
+                    </li>
+                    <li className="answers__buttons-item">
+                        <button className="button">Ответить</button>
+                    </li>
+                </>;
 
         return (
             <section className="section section_first">
@@ -113,12 +155,7 @@ const Quiz = () => {
                             </li>
                         </ul>
                         <ul className="answers__buttons">
-                            <li className="answers__buttons-item">
-                                <button className="answers__submit button">Пропустить</button>
-                            </li>
-                            <li className="answers__buttons-item">
-                                <button className="answers__submit button">Ответить</button>
-                            </li>
+                            {buttonsView}
                         </ul>
                     </form>
                 </div>
@@ -126,15 +163,8 @@ const Quiz = () => {
         );
     };
 
-    // const view = isError 
-    //     ? <h2>Ошибка</h2>
-    //     : isLoading 
-    //     ? <h2>Спиннер</h2>
-    //     : <UI/>;
-
     return (
         <>
-            {/* {view} */}
             <UI/>
         </>
     );
