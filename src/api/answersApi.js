@@ -1,19 +1,19 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
-export const quizApi = createApi({
-    reducerPath: 'quizApi',
+export const answersApi = createApi({
+    reducerPath: 'answersApi',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:3001'
     }),
-    // tagTypes: ['Quiz'],
+    // tagTypes: ['Answers'],
     endpoints: (builder) => ({
-        getQuestion: builder.query({
-            query: (id) => `/questions/${id}`,
+        getAmountOfCorrectAnswers: builder.query({
+            query: () => `/answers`,
             // providesTags: ['Quiz']
         }),
     })
 });
 
 export const {
-    useGetQuestionQuery, 
-} = quizApi;
+    useGetAmountOfCorrectAnswersQuery, 
+} = answersApi;

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom'; 
 
 import { useGetQuestionQuery } from '../../api/quizApi';
+import { useGetAmountOfCorrectAnswersQuery } from '../../api/answersApi';
 
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
@@ -11,7 +12,6 @@ import './quiz.sass';
 const Quiz = () => {
     const [customError, setCustomError] = useState(false);
     const [currentQuestion, setCurrentQuestion] = useState(1);
-    const [amountOfCorrectAnswers, setAmountOfCorrectAnswers] = useState(0);
 
     const {
         data: question = {},
@@ -21,6 +21,20 @@ const Quiz = () => {
 
     const {indexNumber, description, answers, correctAnswer} = question;
 
+    const {
+        data: amountOfCorrectAnswersData,
+        isLoading: isAmountOfCorrectAnswersLoading,
+        isError: isAmountOfCorrectAnswersError,
+    } = useGetAmountOfCorrectAnswersQuery();
+
+    const amountOfCorrectAnswers = isAmountOfCorrectAnswersLoading
+        ? 'загрузка'
+        : isAmountOfCorrectAnswersError
+        ? 'ошибка'
+        : amountOfCorrectAnswersData.amountOfCorrectAnswers;
+
+    console.log(amountOfCorrectAnswers);
+
     const onReload = () => {
         window.location.reload();
     };
@@ -29,7 +43,7 @@ const Quiz = () => {
         e.preventDefault();
 
         if (e.target.answer.value === correctAnswer) {
-            setAmountOfCorrectAnswers(amountOfCorrectAnswers => amountOfCorrectAnswers + 1);
+            // setAmountOfCorrectAnswers(amountOfCorrectAnswers => amountOfCorrectAnswers + 1);
 
             if (currentQuestion === 2) {
                 window.location.href = '/result';
