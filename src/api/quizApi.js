@@ -5,13 +5,25 @@ export const quizApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:3001'
     }),
-    tagTypes: ['Quiz'],
+    tagTypes: ['Quiz', 'IndexOfCurrentQuestion'],
     endpoints: (builder) => ({
         getQuestions: builder.query({
             query: () => `/questions`
         }),
         getQuestion: builder.query({
             query: (id) => `/questions/${id}`
+        }),
+        getIndexOfCurrentQuestion: builder.query({
+            query: () => '/indexOfCurrentQuestion',
+            providesTags: ['IndexOfCurrentQuestion']
+        }),
+        updateIndexOfCurrentQuestion: builder.mutation({
+            query: (data) => ({
+                url: '/indexOfCurrentQuestion',
+                method: 'PATCH',
+                body: data,
+            }),
+            invalidatesTags: ['IndexOfCurrentQuestion']
         }),
         getAmountOfCorrectAnswers: builder.query({
             query: () => `/answers`,
@@ -31,6 +43,8 @@ export const quizApi = createApi({
 export const {
     useGetQuestionsQuery,
     useGetQuestionQuery, 
+    useGetIndexOfCurrentQuestionQuery,
+    useUpdateIndexOfCurrentQuestionMutation,
     useGetAmountOfCorrectAnswersQuery,
     useUpdateAmountOfCorrectAnswersMutation
 } = quizApi;

@@ -25,7 +25,10 @@
       "correctAnswer": "Ответ 2"
     }
   ],
+  "indexOfCurrentQuestion": {
+    "indexOfCurrentQuestion": 2
+  },
   "answers": {
-    "amountOfCorrectAnswers": 7
+    "amountOfCorrectAnswers": 2
   }
 }
