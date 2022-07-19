@@ -7,7 +7,7 @@ const Result = () => {
         <>
             <section className="result section">
                 <div className="container">
-                    <h1 className="result__title">Результат</h1>
+                    <h1 className="title">Результат</h1>
                 </div>
             </section>
         </>
