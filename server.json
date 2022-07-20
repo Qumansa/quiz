@@ -26,9 +26,12 @@
     }
   ],
   "indexOfCurrentQuestion": {
-    "indexOfCurrentQuestion": 2
+    "indexOfCurrentQuestion": 1
   },
   "answers": {
-    "amountOfCorrectAnswers": 2
+    "amountOfCorrectAnswers": 0
+  },
+  "isQuizOver": {
+    "isQuizOver": false
   }
 }

@@ -2,19 +2,17 @@ import { Link } from 'react-router-dom';
 
 import './result.sass';
 
-const Result = ({amountOfCorrectAnswers, totalAmountOfQuestions, updateAmountOfCorrectAnswers, updateIndexOfCurrentQuestion}) => {
+const Result = ({amountOfCorrectAnswers, totalAmountOfQuestions, updateAmountOfCorrectAnswers, updateIndexOfCurrentQuestion, updateIsQuizOver}) => {
     const onReset = () => {
-        const amountOfCorrectAnswersData = {
+        updateAmountOfCorrectAnswers({
             amountOfCorrectAnswers: 0
-        };
-
-        updateAmountOfCorrectAnswers(amountOfCorrectAnswersData);
-
-        const indexOfCurrentQuestionData = {
+        });
+        updateIndexOfCurrentQuestion({
             indexOfCurrentQuestion: 1
-        };
-
-        updateIndexOfCurrentQuestion(indexOfCurrentQuestionData);
+        });
+        updateIsQuizOver({
+            isQuizOver: false
+        });
     };
 
     return (

@@ -7,18 +7,31 @@ import {
     useGetIndexOfCurrentQuestionQuery,
     useUpdateIndexOfCurrentQuestionMutation,
     useGetAmountOfCorrectAnswersQuery,
-    useUpdateAmountOfCorrectAnswersMutation 
+    useUpdateAmountOfCorrectAnswersMutation,
+    useGetIsQuizOverQuery,
+    useUpdateIsQuizOverMutation
 } from '../../api/quizApi';
 
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Result from '../result/Result';
 
+import reload from '../utils/reload';
+
 import './quiz.sass';
 
 const Quiz = () => {
+    const {
+        data: isQuizOverData,
+        isLoading: isIsQuizOverLoading,
+        isError: isIsQuizOverError,
+    } = useGetIsQuizOverQuery();
+
+    const isQuizOver = isIsQuizOverLoading || isIsQuizOverError 
+        ? false
+        : isQuizOverData.isQuizOver;
+
     const [customError, setCustomError] = useState(false);
-    const [isQuizOver, setIsQuizOver] = useState(false);
 
     const {
         data: questionsData,
@@ -43,14 +56,6 @@ const Quiz = () => {
         : indexOfCurrentQuestionData.indexOfCurrentQuestion;
 
     const {
-        data: question = {},
-        isFetching,
-        isError,
-    } = useGetQuestionQuery(indexOfCurrentQuestion);
-
-    const {indexNumber, description, answers, correctAnswer} = question;
-
-    const {
         data: amountOfCorrectAnswersData,
         isLoading: isAmountOfCorrectAnswersLoading,
         isError: isAmountOfCorrectAnswersError,
@@ -64,29 +69,33 @@ const Quiz = () => {
 
     const [updateIndexOfCurrentQuestion] = useUpdateIndexOfCurrentQuestionMutation();
 
-    const onReload = () => {
-        window.location.reload();
-    };
+    const {
+        data: question = {},
+        isFetching,
+        isError,
+    } = useGetQuestionQuery(indexOfCurrentQuestion);
+
+    const {indexNumber, description, answers, correctAnswer} = question;
+
+    const [updateIsQuizOver] = useUpdateIsQuizOverMutation();
 
     const onSubmit = (e) => {
         e.preventDefault();
 
         if (e.target.answer.value === correctAnswer) {
-            const data = {
+            updateAmountOfCorrectAnswers({
                 amountOfCorrectAnswers: amountOfCorrectAnswers + 1
-            };
-
-            updateAmountOfCorrectAnswers(data);
+            });
         };
 
         if (indexOfCurrentQuestion === totalAmountOfQuestions) {
-            setIsQuizOver(true);
+            updateIsQuizOver({
+                isQuizOver: true
+            });
         } else {
-            const data = {
+            updateIndexOfCurrentQuestion({
                 indexOfCurrentQuestion: indexOfCurrentQuestion + 1
-            };
-
-            updateIndexOfCurrentQuestion(data);
+            });
         }
     };
 
@@ -119,7 +128,7 @@ const Quiz = () => {
                     <li className="answers__buttons-item">
                         <button 
                             className="button"
-                            onClick={onReload}>
+                            onClick={reload}>
                             Перезагрузить
                         </button>
                     </li>
@@ -234,7 +243,8 @@ const Quiz = () => {
             amountOfCorrectAnswers={amountOfCorrectAnswers}
             totalAmountOfQuestions={totalAmountOfQuestions}
             updateAmountOfCorrectAnswers={updateAmountOfCorrectAnswers}
-            updateIndexOfCurrentQuestion={updateIndexOfCurrentQuestion}/>
+            updateIndexOfCurrentQuestion={updateIndexOfCurrentQuestion}
+            updateIsQuizOver={updateIsQuizOver}/>
         : <UI/>;
 };
 

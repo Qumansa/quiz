@@ -5,7 +5,7 @@ export const quizApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:3001'
     }),
-    tagTypes: ['Quiz', 'IndexOfCurrentQuestion'],
+    tagTypes: ['Quiz', 'IndexOfCurrentQuestion', 'IsQuizOver'],
     endpoints: (builder) => ({
         getQuestions: builder.query({
             query: () => `/questions`
@@ -37,6 +37,18 @@ export const quizApi = createApi({
             }),
             invalidatesTags: ['Quiz']
         }),
+        getIsQuizOver: builder.query({
+            query: () => `/isQuizOver`,
+            providesTags: ['IsQuizOver']
+        }),
+        updateIsQuizOver: builder.mutation({
+            query: (data) => ({
+                url: '/isQuizOver',
+                method: 'PATCH',
+                body: data,
+            }),
+            invalidatesTags: ['IsQuizOver']
+        }),
     })
 });
 
@@ -46,5 +58,7 @@ export const {
     useGetIndexOfCurrentQuestionQuery,
     useUpdateIndexOfCurrentQuestionMutation,
     useGetAmountOfCorrectAnswersQuery,
-    useUpdateAmountOfCorrectAnswersMutation
+    useUpdateAmountOfCorrectAnswersMutation,
+    useGetIsQuizOverQuery,
+    useUpdateIsQuizOverMutation
 } = quizApi;
