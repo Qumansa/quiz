@@ -12,6 +12,29 @@ const Start = () => {
                     <p className="start__descr">Здесь Вы сможете попробовать свои силы и проверить знания, отвечая на различные вопросы о веб-разработке.</p>
                     <p className="start__descr">Существует 3 уровня сложности: легкий, средний и сложный. В каждом уровне сложности содержится по 10 вопросов. Для того, чтобы пройти уровень, необходимо успешно ответить на 7/10 вопросов, после чего откроется следующий. Если Вы затрудняетесь ответить, вопрос можно пропустить и вернуться к нему позднее.</p>
                     <p className="start__descr">Желаем удачи!</p>
+                    <p className="start__descr">
+                        Выберите уровень сложности:
+                        <select className="start__select">
+                            <option 
+                                className="start__option" 
+                                selected 
+                                value="Легкий">
+                                Легкий
+                            </option>
+                            <option 
+                                className="start__option"
+                                disabled 
+                                value="Средний">
+                                Средний
+                            </option>
+                            <option 
+                                className="start__option"
+                                disabled 
+                                value="Сложный">
+                                Сложный
+                            </option>
+                        </select>
+                    </p>
                     <div className="start__link-wrapper">
                         <Link 
                             className="

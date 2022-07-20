@@ -1,3 +1,5 @@
+@import '../../style/_variables'
+    
 .start
     display: flex
     justify-content: center
@@ -14,3 +16,15 @@
             display: flex
             justify-content: center
             margin-top: 50px
+    &__select
+        margin-left: 15px
+        padding: 5px 15px
+        color: $sandyBeach
+        background-color: $brownRust
+        border: 2px solid $brownRust
+        border-radius: 5px
+    &__option
+        color: $sandyBeach
+        background-color: $brownRust
+        &:disabled
+            color: $whiskey

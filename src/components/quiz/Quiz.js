@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom'; 
 
 import { 
@@ -21,6 +21,8 @@ import reload from '../utils/reload';
 import './quiz.sass';
 
 const Quiz = () => {
+    const [customError, setCustomError] = useState(false);
+
     const {
         data: isQuizOverData,
         isLoading: isIsQuizOverLoading,
@@ -31,19 +33,25 @@ const Quiz = () => {
         ? false
         : isQuizOverData.isQuizOver;
 
-    const [customError, setCustomError] = useState(false);
-
     const {
         data: questionsData,
         isLoading: areQuestionsLoading,
         isError: areQuestionsError,
     } = useGetQuestionsQuery();
 
-    const totalAmountOfQuestions = useMemo(() => {
-        return areQuestionsLoading || areQuestionsError || customError
-            ? '-'
-            : questionsData.length;
-    }, [areQuestionsLoading, areQuestionsError, questionsData, customError]);
+    const totalAmountOfQuestions = areQuestionsLoading || areQuestionsError || customError
+        ? '-'
+        : questionsData.length;
+
+    const {
+        data: amountOfCorrectAnswersData,
+        isLoading: isAmountOfCorrectAnswersLoading,
+        isError: isAmountOfCorrectAnswersError,
+    } = useGetAmountOfCorrectAnswersQuery();
+
+    const amountOfCorrectAnswers = isAmountOfCorrectAnswersLoading || isAmountOfCorrectAnswersError || customError 
+        ? '-'
+        : amountOfCorrectAnswersData.amountOfCorrectAnswers;
 
     const {
         data: indexOfCurrentQuestionData,
@@ -56,20 +64,6 @@ const Quiz = () => {
         : indexOfCurrentQuestionData.indexOfCurrentQuestion;
 
     const {
-        data: amountOfCorrectAnswersData,
-        isLoading: isAmountOfCorrectAnswersLoading,
-        isError: isAmountOfCorrectAnswersError,
-    } = useGetAmountOfCorrectAnswersQuery();
-
-    const [updateAmountOfCorrectAnswers] = useUpdateAmountOfCorrectAnswersMutation();
-
-    const amountOfCorrectAnswers = isAmountOfCorrectAnswersLoading || isAmountOfCorrectAnswersError || customError 
-        ? '-'
-        : amountOfCorrectAnswersData.amountOfCorrectAnswers;
-
-    const [updateIndexOfCurrentQuestion] = useUpdateIndexOfCurrentQuestionMutation();
-
-    const {
         data: question = {},
         isFetching,
         isError,
@@ -77,7 +71,9 @@ const Quiz = () => {
 
     const {indexNumber, description, answers, correctAnswer} = question;
 
+    const [updateAmountOfCorrectAnswers] = useUpdateAmountOfCorrectAnswersMutation();
     const [updateIsQuizOver] = useUpdateIsQuizOverMutation();
+    const [updateIndexOfCurrentQuestion] = useUpdateIndexOfCurrentQuestionMutation();
 
     const onSubmit = (e) => {
         e.preventDefault();
