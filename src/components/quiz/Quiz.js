@@ -1,9 +1,10 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom'; 
 
 import { 
     useGetQuestionsQuery,
     useGetQuestionQuery, 
+    useGetCurrentDifficultyQuery,
     useGetIndexOfCurrentQuestionQuery,
     useUpdateIndexOfCurrentQuestionMutation,
     useGetAmountOfCorrectAnswersQuery,
@@ -16,22 +17,28 @@ import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Result from '../result/Result';
 
+import transformCurrentDifficulty from '../utils/transformCurrentDifficulty';
 import reload from '../utils/reload';
 
 import './quiz.sass';
 
 const Quiz = () => {
-    const {data: isQuizOver} = useGetIsQuizOverQuery();
-    const {data: questionsData = []} = useGetQuestionsQuery('easy');
+    const {data: isQuizOver = false} = useGetIsQuizOverQuery();
+
+    let {data: currentDifficulty} = useGetCurrentDifficultyQuery();
+    currentDifficulty = transformCurrentDifficulty(currentDifficulty);
+
+    const {data: questionsData = []} = useGetQuestionsQuery(currentDifficulty);
     const totalAmountOfQuestions = questionsData.length;
+    
     const {data: amountOfCorrectAnswers = '-'} = useGetAmountOfCorrectAnswersQuery();
     const {data: indexOfCurrentQuestion = 1} = useGetIndexOfCurrentQuestionQuery();
-
+    
     const {
         data: question = {},
         isFetching,
         isError,
-    } = useGetQuestionQuery(`easy/${indexOfCurrentQuestion}`);
+    } = useGetQuestionQuery(`${currentDifficulty}/${indexOfCurrentQuestion}`);
 
     const {indexNumber = '-', description, answers, correctAnswer} = question;
 
@@ -66,7 +73,7 @@ const Quiz = () => {
             ? <ErrorMessage/>
             : <p className="question__descr">{description}</p>;
 
-        const getAnswersView = (arr = [1, 2, 3, 4]) => {
+        const getAnswersView = (arr = ['-', '-', '-', '-']) => {
             return arr.map((answer, index) => {
                 return (
                     <li 

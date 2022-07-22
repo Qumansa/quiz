@@ -78,12 +78,24 @@
     }
   ],
   "difficulties": [
-    "easy",
-    "medium",
-    "hard"
+    {
+      "id": 1,
+      "name": "Легкий",
+      "isAvailable": true
+    },
+    {
+      "id": 2,
+      "name": "Средний",
+      "isAvailable": false
+    },
+    {
+      "id": 3,
+      "name": "Сложный",
+      "isAvailable": false
+    }
   ],
   "currentDifficulty": {
-    "currentDifficulty": "easy"
+    "currentDifficulty": "Сложный"
   },
   "indexOfCurrentQuestion": {
     "indexOfCurrentQuestion": 1

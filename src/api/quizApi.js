@@ -3,9 +3,9 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 export const quizApi = createApi({
     reducerPath: 'quizApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:3002'
+        baseUrl: 'http://localhost:3001'
     }),
-    tagTypes: ['Quiz', 'IndexOfCurrentQuestion', 'IsQuizOver'],
+    tagTypes: ['Quiz', 'IndexOfCurrentQuestion', 'IsQuizOver', 'CurrentDifficulty'],
     endpoints: (builder) => ({
         getQuestions: builder.query({
             query: (difficulty) => `/${difficulty}`
@@ -19,6 +19,15 @@ export const quizApi = createApi({
         getCurrentDifficulty: builder.query({
             query: () => `/currentDifficulty`,
             transformResponse: (response) => response.currentDifficulty,
+            providesTags: ['CurrentDifficulty']
+        }),
+        updateCurrentDifficulty: builder.mutation({
+            query: (data) => ({
+                url: '/currentDifficulty',
+                method: 'PATCH',
+                body: data,
+            }),
+            invalidatesTags: ['CurrentDifficulty']
         }),
         getIndexOfCurrentQuestion: builder.query({
             query: () => '/indexOfCurrentQuestion',
@@ -66,6 +75,7 @@ export const {
     useGetQuestionsQuery,
     useGetQuestionQuery, 
     useGetDifficultiesQuery,
+    useUpdateCurrentDifficultyMutation,
     useGetCurrentDifficultyQuery,
     useGetIndexOfCurrentQuestionQuery,
     useUpdateIndexOfCurrentQuestionMutation,
