@@ -1,9 +1,9 @@
 {
-  "questions": [
+  "easy": [
     {
       "id": 1,
       "indexNumber": 1,
-      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta porro eaque aperiam cupiditate rerum debitis ex laborum saepe?",
+      "description": "Описание легкого вопроса 1",
       "answers": [
         "Ответ 1",
         "Ответ 2",
@@ -15,7 +15,7 @@
     {
       "id": 2,
       "indexNumber": 2,
-      "description": "Dicta porro eaque aperiam cupiditate rerum debitis ex laborum saepe?",
+      "description": "Описание легкого вопроса 2",
       "answers": [
         "Ответ 1",
         "Ответ 2",
@@ -25,6 +25,66 @@
       "correctAnswer": "Ответ 2"
     }
   ],
+  "medium": [
+    {
+      "id": 1,
+      "indexNumber": 1,
+      "description": "Описание среднего вопроса 1",
+      "answers": [
+        "Ответ 1",
+        "Ответ 2",
+        "Ответ 3",
+        "Ответ 4"
+      ],
+      "correctAnswer": "Ответ 1"
+    },
+    {
+      "id": 2,
+      "indexNumber": 2,
+      "description": "Описание среднего вопроса 2",
+      "answers": [
+        "Ответ 1",
+        "Ответ 2",
+        "Ответ 3",
+        "Ответ 4"
+      ],
+      "correctAnswer": "Ответ 2"
+    }
+  ],
+  "hard": [
+    {
+      "id": 1,
+      "indexNumber": 1,
+      "description": "Описание сложного вопроса 1",
+      "answers": [
+        "Ответ 1",
+        "Ответ 2",
+        "Ответ 3",
+        "Ответ 4"
+      ],
+      "correctAnswer": "Ответ 1"
+    },
+    {
+      "id": 2,
+      "indexNumber": 2,
+      "description": "Описание сложного вопроса 2",
+      "answers": [
+        "Ответ 1",
+        "Ответ 2",
+        "Ответ 3",
+        "Ответ 4"
+      ],
+      "correctAnswer": "Ответ 2"
+    }
+  ],
+  "difficulties": [
+    "easy",
+    "medium",
+    "hard"
+  ],
+  "currentDifficulty": {
+    "currentDifficulty": "easy"
+  },
   "indexOfCurrentQuestion": {
     "indexOfCurrentQuestion": 1
   },

@@ -1,0 +1,34 @@
+{
+    "questions": [
+        {
+            "id": 1,
+            "description": "Описание вопроса 1",
+            "diffuculty": "Легкий"
+        },
+        {
+            "id": 2,
+            "description": "Описание вопроса 2",
+            "diffuculty": "Легкий"
+        },
+        {
+            "id": 3,
+            "description": "Описание вопроса 3",
+            "diffuculty": "Средний"
+        },
+        {
+            "id": 4,
+            "description": "Описание вопроса 4",
+            "diffuculty": "Средний"
+        },
+        {
+            "id": 5,
+            "description": "Описание вопроса 5",
+            "diffuculty": "Сложный"
+        },
+        {
+            "id": 6,
+            "description": "Описание вопроса 6",
+            "diffuculty": "Сложный"
+        }
+    ]
+}

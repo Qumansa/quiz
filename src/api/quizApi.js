@@ -3,18 +3,26 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 export const quizApi = createApi({
     reducerPath: 'quizApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:3001'
+        baseUrl: 'http://localhost:3002'
     }),
     tagTypes: ['Quiz', 'IndexOfCurrentQuestion', 'IsQuizOver'],
     endpoints: (builder) => ({
         getQuestions: builder.query({
-            query: () => `/questions`
+            query: (difficulty) => `/${difficulty}`
         }),
         getQuestion: builder.query({
-            query: (id) => `/questions/${id}`
+            query: (url) => `/${url}`
+        }),
+        getDifficulties: builder.query({
+            query: () => `/difficulties`
+        }),
+        getCurrentDifficulty: builder.query({
+            query: () => `/currentDifficulty`,
+            transformResponse: (response) => response.currentDifficulty,
         }),
         getIndexOfCurrentQuestion: builder.query({
             query: () => '/indexOfCurrentQuestion',
+            transformResponse: (response) => response.indexOfCurrentQuestion,
             providesTags: ['IndexOfCurrentQuestion']
         }),
         updateIndexOfCurrentQuestion: builder.mutation({
@@ -27,6 +35,7 @@ export const quizApi = createApi({
         }),
         getAmountOfCorrectAnswers: builder.query({
             query: () => `/answers`,
+            transformResponse: (response) => response.amountOfCorrectAnswers,
             providesTags: ['Quiz']
         }),
         updateAmountOfCorrectAnswers: builder.mutation({
@@ -39,6 +48,7 @@ export const quizApi = createApi({
         }),
         getIsQuizOver: builder.query({
             query: () => `/isQuizOver`,
+            transformResponse: (response) => response.isQuizOver,
             providesTags: ['IsQuizOver']
         }),
         updateIsQuizOver: builder.mutation({
@@ -55,6 +65,8 @@ export const quizApi = createApi({
 export const {
     useGetQuestionsQuery,
     useGetQuestionQuery, 
+    useGetDifficultiesQuery,
+    useGetCurrentDifficultyQuery,
     useGetIndexOfCurrentQuestionQuery,
     useUpdateIndexOfCurrentQuestionMutation,
     useGetAmountOfCorrectAnswersQuery,

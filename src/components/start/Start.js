@@ -14,22 +14,23 @@ const Start = () => {
                     <p className="start__descr">Желаем удачи!</p>
                     <p className="start__descr">
                         Выберите уровень сложности:
-                        <select className="start__select">
+                        <select 
+                            className="start__select">
                             <option 
+                                selected
                                 className="start__option" 
-                                selected 
                                 value="Легкий">
                                 Легкий
                             </option>
                             <option 
                                 className="start__option"
-                                disabled 
+                                // disabled 
                                 value="Средний">
                                 Средний
                             </option>
                             <option 
                                 className="start__option"
-                                disabled 
+                                // disabled 
                                 value="Сложный">
                                 Сложный
                             </option>
