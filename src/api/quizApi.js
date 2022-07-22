@@ -5,7 +5,7 @@ export const quizApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:3001'
     }),
-    tagTypes: ['Quiz', 'IndexOfCurrentQuestion', 'IsQuizOver', 'CurrentDifficulty'],
+    tagTypes: ['Quiz', 'IndexOfCurrentQuestion', 'IsQuizOver', 'Difficulties', 'CurrentDifficulty'],
     endpoints: (builder) => ({
         getQuestions: builder.query({
             query: (difficulty) => `/${difficulty}`
@@ -14,7 +14,16 @@ export const quizApi = createApi({
             query: (url) => `/${url}`
         }),
         getDifficulties: builder.query({
-            query: () => `/difficulties`
+            query: () => `/difficulties`,
+            providesTags: ['Difficulties']
+        }),
+        updateDifficulty: builder.mutation({
+            query: (data) => ({
+                url: `/difficulties/${data.id}`,
+                method: 'PATCH',
+                body: data,
+            }),
+            invalidatesTags: ['Difficulties']
         }),
         getCurrentDifficulty: builder.query({
             query: () => `/currentDifficulty`,
@@ -75,6 +84,7 @@ export const {
     useGetQuestionsQuery,
     useGetQuestionQuery, 
     useGetDifficultiesQuery,
+    useUpdateDifficultyMutation,
     useUpdateCurrentDifficultyMutation,
     useGetCurrentDifficultyQuery,
     useGetIndexOfCurrentQuestionQuery,

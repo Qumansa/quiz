@@ -1,9 +1,38 @@
 import { Link } from 'react-router-dom'; 
 
+import { 
+    useGetDifficultiesQuery,
+    useUpdateDifficultyMutation,
+    useGetCurrentDifficultyQuery
+} from '../../api/quizApi';
+
 import './result.sass';
 
 const Result = ({amountOfCorrectAnswers, totalAmountOfQuestions, updateAmountOfCorrectAnswers, updateIndexOfCurrentQuestion, updateIsQuizOver}) => {
+    const {data: difficulties = []} = useGetDifficultiesQuery();
+    const {data: currentDifficulty} = useGetCurrentDifficultyQuery();
+    const [updateDifficulty] = useUpdateDifficultyMutation();
+
+    const mediumDiffucultyData = difficulties.filter(difficulty => difficulty.name === 'Средний')[0];
+    const hardDiffucultyData = difficulties.filter(difficulty => difficulty.name === 'Сложный')[0];
+
     const onReset = () => {
+        if (amountOfCorrectAnswers === totalAmountOfQuestions) {
+            if (currentDifficulty === 'Легкий' && !mediumDiffucultyData?.isAvailable) {
+                updateDifficulty({
+                    id: mediumDiffucultyData.id,
+                    isAvailable: true
+                });
+            } 
+
+            if (currentDifficulty === 'Средний' && !hardDiffucultyData?.isAvailable) {
+                updateDifficulty({
+                    id: hardDiffucultyData.id,
+                    isAvailable: true
+                });
+            } 
+        }
+
         updateAmountOfCorrectAnswers({
             amountOfCorrectAnswers: 0
         });

@@ -35,8 +35,7 @@ const Start = () => {
                         className="start__option"
                         key={id} 
                         value={name}
-                        // disabled={!isAvailable}
-                        >
+                        disabled={!isAvailable}>
                         {name}
                     </option>
                 );
