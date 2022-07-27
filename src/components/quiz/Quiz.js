@@ -1,16 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom'; 
 
 import { 
     useGetQuestionsQuery,
     useGetQuestionQuery, 
+    useUpdateQuestionMutation,
     useGetCurrentDifficultyQuery,
     useGetIndexOfCurrentQuestionQuery,
     useUpdateIndexOfCurrentQuestionMutation,
     useGetAmountOfCorrectAnswersQuery,
     useUpdateAmountOfCorrectAnswersMutation,
     useGetIsQuizOverQuery,
-    useUpdateIsQuizOverMutation
+    useUpdateIsQuizOverMutation,
+    useGetCheckSkippedQuery,
+    useUpdateCheckSkippedMutation
 } from '../../api/quizApi';
 
 import Spinner from '../spinner/Spinner';
@@ -28,26 +31,93 @@ const Quiz = () => {
     let {data: currentDifficulty} = useGetCurrentDifficultyQuery();
     currentDifficulty = transformCurrentDifficulty(currentDifficulty);
 
-    const {data: questionsData = []} = useGetQuestionsQuery(currentDifficulty);
-    const totalAmountOfQuestions = questionsData.length;
+    const {data: questions = []} = useGetQuestionsQuery(currentDifficulty);
+    const totalAmountOfQuestions = questions.length;
     
     const {data: amountOfCorrectAnswers = '-'} = useGetAmountOfCorrectAnswersQuery();
     const {data: indexOfCurrentQuestion = 1} = useGetIndexOfCurrentQuestionQuery();
     
     const {
-        data: question = {},
+        data: questionData = {},
+        isLoading,
         isFetching,
         isError,
     } = useGetQuestionQuery(`${currentDifficulty}/${indexOfCurrentQuestion}`);
 
-    const {indexNumber = '-', description, answers, correctAnswer} = question;
+    const {indexNumber = '-', description, answers, correctAnswer, skipped} = isFetching || isError
+        ? {}
+        : questionData;
+
+    const {
+        data: checkSkippedData,
+        isSuccess: isCheckSkippedDataSuccess
+    } = useGetCheckSkippedQuery();
+
+    const checkSkipped = isCheckSkippedDataSuccess ? checkSkippedData : null;
 
     const [updateAmountOfCorrectAnswers] = useUpdateAmountOfCorrectAnswersMutation();
     const [updateIsQuizOver] = useUpdateIsQuizOverMutation();
     const [updateIndexOfCurrentQuestion] = useUpdateIndexOfCurrentQuestionMutation();
+    const [updateQuestion] = useUpdateQuestionMutation();
+    const [updateCheckSkipped] =  useUpdateCheckSkippedMutation();
+
+    console.log(`
+        Индекс текущего вопроса: ${indexOfCurrentQuestion}
+        Skipped: ${skipped}
+        CheckSkipped: ${checkSkipped}
+    `);
+
+    useEffect(() => {
+        if (checkSkipped && skipped === false) {
+            if (indexOfCurrentQuestion === totalAmountOfQuestions) {
+                if (questions.every(question => !question.skipped)) {
+                    updateIsQuizOver({
+                        isQuizOver: true
+                    });
+                } else {
+                    updateIndexOfCurrentQuestion({
+                        indexOfCurrentQuestion: 1
+                    });
+                }
+            } else {
+                console.log(`На текущий вопрос №${indexOfCurrentQuestion} уже был дан ответ. Переходим к следующему`)
+                updateIndexOfCurrentQuestion({
+                    indexOfCurrentQuestion: indexOfCurrentQuestion + 1
+                });
+            }
+        }
+    }, [indexOfCurrentQuestion, checkSkipped, skipped, totalAmountOfQuestions, updateIndexOfCurrentQuestion, updateIsQuizOver, questions]);
+
+    const onSkip = (e) => {
+        e.preventDefault();
+        
+        updateQuestion({
+            url: `${currentDifficulty}/${indexOfCurrentQuestion}`,
+            skipped: true
+        });
+
+        if (indexOfCurrentQuestion !== totalAmountOfQuestions) {
+            updateIndexOfCurrentQuestion({
+                indexOfCurrentQuestion: indexOfCurrentQuestion + 1
+            });
+        } else {
+            updateIndexOfCurrentQuestion({
+                indexOfCurrentQuestion: 1
+            });
+
+            updateCheckSkipped({
+                checkSkipped: true
+            });
+        }
+    };
 
     const onSubmit = (e) => {
         e.preventDefault();
+
+        updateQuestion({
+            url: `${currentDifficulty}/${indexOfCurrentQuestion}`,
+            skipped: false
+        });
 
         if (e.target.answer.value === correctAnswer) {
             updateAmountOfCorrectAnswers({
@@ -56,12 +126,22 @@ const Quiz = () => {
         };
 
         if (indexOfCurrentQuestion === totalAmountOfQuestions) {
-            updateIsQuizOver({
-                isQuizOver: true
-            });
+            if (questions.some(question => question.skipped === true)) {
+                updateIndexOfCurrentQuestion({
+                    indexOfCurrentQuestion: 1
+                });
+
+                updateCheckSkipped({
+                    checkSkipped: true
+                });
+            } else {
+                updateIsQuizOver({
+                    isQuizOver: true
+                });
+            }
         } else {
             updateIndexOfCurrentQuestion({
-                indexOfCurrentQuestion: indexOfCurrentQuestion + 1
+                indexOfCurrentQuestion: indexOfCurrentQuestion + 1,
             });
         }
     };
@@ -102,7 +182,7 @@ const Quiz = () => {
 
         const answersView = getAnswersView(answers);
 
-        const buttonsView = isFetching 
+        const buttonsView = isLoading 
             ? <Spinner/>  
             : isError 
             ? 
@@ -118,10 +198,19 @@ const Quiz = () => {
             : 
                 <>
                     <li className="answers__buttons-item">
-                        <button className="button">Пропустить</button>
+                        <button 
+                            className="button"
+                            disabled={isFetching ? 'disabled' : false}
+                            onClick={onSkip}>
+                            Пропустить
+                        </button>
                     </li>
                     <li className="answers__buttons-item">
-                        <button className="button">Ответить</button>
+                        <button 
+                            className="button"
+                            disabled={isFetching ? 'disabled' : false}>
+                            Ответить
+                        </button>
                     </li>
                 </>;
 
@@ -167,7 +256,8 @@ const Quiz = () => {
             totalAmountOfQuestions={totalAmountOfQuestions}
             updateAmountOfCorrectAnswers={updateAmountOfCorrectAnswers}
             updateIndexOfCurrentQuestion={updateIndexOfCurrentQuestion}
-            updateIsQuizOver={updateIsQuizOver}/>
+            updateIsQuizOver={updateIsQuizOver}
+            updateCheckSkipped={updateCheckSkipped}/>
         : <UI/>;
 };
 

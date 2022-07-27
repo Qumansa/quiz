@@ -10,7 +10,8 @@
         "Ответ 3",
         "Ответ 4"
       ],
-      "correctAnswer": "Ответ 1"
+      "correctAnswer": "Ответ 1",
+      "skipped": false
     },
     {
       "id": 2,
@@ -22,7 +23,21 @@
         "Ответ 3",
         "Ответ 4"
       ],
-      "correctAnswer": "Ответ 2"
+      "correctAnswer": "Ответ 2",
+      "skipped": false
+    },
+    {
+      "id": 3,
+      "indexNumber": 3,
+      "description": "Описание легкого вопроса 3",
+      "answers": [
+        "Ответ 1",
+        "Ответ 2",
+        "Ответ 3",
+        "Ответ 4"
+      ],
+      "correctAnswer": "Ответ 3",
+      "skipped": false
     }
   ],
   "medium": [
@@ -36,7 +51,8 @@
         "Ответ 3",
         "Ответ 4"
       ],
-      "correctAnswer": "Ответ 1"
+      "correctAnswer": "Ответ 1",
+      "skipped": false
     },
     {
       "id": 2,
@@ -48,7 +64,8 @@
         "Ответ 3",
         "Ответ 4"
       ],
-      "correctAnswer": "Ответ 2"
+      "correctAnswer": "Ответ 2",
+      "skipped": false
     }
   ],
   "hard": [
@@ -62,7 +79,8 @@
         "Ответ 3",
         "Ответ 4"
       ],
-      "correctAnswer": "Ответ 1"
+      "correctAnswer": "Ответ 1",
+      "skipped": false
     },
     {
       "id": 2,
@@ -74,7 +92,8 @@
         "Ответ 3",
         "Ответ 4"
       ],
-      "correctAnswer": "Ответ 2"
+      "correctAnswer": "Ответ 2",
+      "skipped": false
     }
   ],
   "difficulties": [
@@ -105,5 +124,8 @@
   },
   "isQuizOver": {
     "isQuizOver": false
+  },
+  "checkSkipped": {
+    "checkSkipped": false
   }
 }

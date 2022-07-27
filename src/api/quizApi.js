@@ -5,13 +5,23 @@ export const quizApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:3001'
     }),
-    tagTypes: ['Quiz', 'IndexOfCurrentQuestion', 'IsQuizOver', 'Difficulties', 'CurrentDifficulty'],
+    tagTypes: ['Quiz', 'IndexOfCurrentQuestion', 'IsQuizOver', 'Difficulties', 'CurrentDifficulty', 'Questions', 'Question'],
     endpoints: (builder) => ({
         getQuestions: builder.query({
-            query: (difficulty) => `/${difficulty}`
+            query: (difficulty) => `/${difficulty}`,
+            providesTags: ['Questions']
         }),
         getQuestion: builder.query({
-            query: (url) => `/${url}`
+            query: (url) => `/${url}`,
+            providesTags: ['Question'],
+        }),
+        updateQuestion: builder.mutation({
+            query: ({url, ...data}) => ({
+                url: `/${url}`,
+                method: 'PATCH',
+                body: data,
+            }),
+            invalidatesTags: ['Question', 'Questions']
         }),
         getDifficulties: builder.query({
             query: () => `/difficulties`,
@@ -50,6 +60,7 @@ export const quizApi = createApi({
                 body: data,
             }),
             invalidatesTags: ['IndexOfCurrentQuestion']
+            // invalidatesTags: ['Quiz', 'IndexOfCurrentQuestion', 'IsQuizOver', 'Difficulties', 'CurrentDifficulty', 'Questions', 'Question']
         }),
         getAmountOfCorrectAnswers: builder.query({
             query: () => `/answers`,
@@ -77,12 +88,26 @@ export const quizApi = createApi({
             }),
             invalidatesTags: ['IsQuizOver']
         }),
+        getCheckSkipped: builder.query({
+            query: () => `/checkSkipped`,
+            transformResponse: (response) => response.checkSkipped,
+            providesTags: ['CheckSkipped']
+        }),
+        updateCheckSkipped: builder.mutation({
+            query: (data) => ({
+                url: '/CheckSkipped',
+                method: 'PATCH',
+                body: data,
+            }),
+            invalidatesTags: ['CheckSkipped']
+        }),
     })
 });
 
 export const {
     useGetQuestionsQuery,
-    useGetQuestionQuery, 
+    useGetQuestionQuery,
+    useUpdateQuestionMutation, 
     useGetDifficultiesQuery,
     useUpdateDifficultyMutation,
     useUpdateCurrentDifficultyMutation,
@@ -92,5 +117,7 @@ export const {
     useGetAmountOfCorrectAnswersQuery,
     useUpdateAmountOfCorrectAnswersMutation,
     useGetIsQuizOverQuery,
-    useUpdateIsQuizOverMutation
+    useUpdateIsQuizOverMutation,
+    useGetCheckSkippedQuery,
+    useUpdateCheckSkippedMutation
 } = quizApi;

@@ -8,7 +8,7 @@ import {
 
 import './result.sass';
 
-const Result = ({amountOfCorrectAnswers, totalAmountOfQuestions, updateAmountOfCorrectAnswers, updateIndexOfCurrentQuestion, updateIsQuizOver}) => {
+const Result = ({amountOfCorrectAnswers, totalAmountOfQuestions, updateAmountOfCorrectAnswers, updateIndexOfCurrentQuestion, updateIsQuizOver, updateCheckSkipped}) => {
     const {data: difficulties = []} = useGetDifficultiesQuery();
     const {data: currentDifficulty} = useGetCurrentDifficultyQuery();
     const [updateDifficulty] = useUpdateDifficultyMutation();
@@ -33,6 +33,9 @@ const Result = ({amountOfCorrectAnswers, totalAmountOfQuestions, updateAmountOfC
             } 
         }
 
+        updateCheckSkipped({
+            checkSkipped: false
+        });
         updateAmountOfCorrectAnswers({
             amountOfCorrectAnswers: 0
         });
