@@ -61,12 +61,6 @@ const Quiz = () => {
     const [updateQuestion] = useUpdateQuestionMutation();
     const [updateCheckSkipped] =  useUpdateCheckSkippedMutation();
 
-    console.log(`
-        Индекс текущего вопроса: ${indexOfCurrentQuestion}
-        Skipped: ${skipped}
-        CheckSkipped: ${checkSkipped}
-    `);
-
     useEffect(() => {
         if (checkSkipped && skipped === false) {
             if (indexOfCurrentQuestion === totalAmountOfQuestions) {
@@ -80,7 +74,6 @@ const Quiz = () => {
                     });
                 }
             } else {
-                console.log(`На текущий вопрос №${indexOfCurrentQuestion} уже был дан ответ. Переходим к следующему`)
                 updateIndexOfCurrentQuestion({
                     indexOfCurrentQuestion: indexOfCurrentQuestion + 1
                 });
@@ -96,17 +89,17 @@ const Quiz = () => {
             skipped: true
         });
 
-        if (indexOfCurrentQuestion !== totalAmountOfQuestions) {
-            updateIndexOfCurrentQuestion({
-                indexOfCurrentQuestion: indexOfCurrentQuestion + 1
-            });
-        } else {
+        if (indexOfCurrentQuestion === totalAmountOfQuestions) {
             updateIndexOfCurrentQuestion({
                 indexOfCurrentQuestion: 1
             });
 
             updateCheckSkipped({
                 checkSkipped: true
+            });
+        } else {
+            updateIndexOfCurrentQuestion({
+                indexOfCurrentQuestion: indexOfCurrentQuestion + 1
             });
         }
     };
@@ -186,15 +179,13 @@ const Quiz = () => {
             ? <Spinner/>  
             : isError 
             ? 
-                <>
-                    <li className="answers__buttons-item">
-                        <button 
-                            className="button"
-                            onClick={reload}>
-                            Перезагрузить
-                        </button>
-                    </li>
-                </>
+                <li className="answers__buttons-item">
+                    <button 
+                        className="button"
+                        onClick={reload}>
+                        Перезагрузить
+                    </button>
+                </li>
             : 
                 <>
                     <li className="answers__buttons-item">

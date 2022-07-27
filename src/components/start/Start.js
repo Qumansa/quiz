@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom';
 import { 
     useGetDifficultiesQuery,
     useGetCurrentDifficultyQuery,
-    useUpdateCurrentDifficultyMutation
+    useUpdateIndexOfCurrentQuestionMutation,
+    useUpdateCurrentDifficultyMutation,
+    useUpdateAmountOfCorrectAnswersMutation,
+    useGetIsQuizStartedQuery,
+    useUpdateIsQuizStartedMutation,
+    useUpdateCheckSkippedMutation
 } from '../../api/quizApi';
 
 import Spinner from '../spinner/Spinner';
@@ -14,6 +19,10 @@ import './start.sass';
 const Start = () => {
     const {data: currentDifficulty} = useGetCurrentDifficultyQuery();
     const [updateCurrentDifficulty] = useUpdateCurrentDifficultyMutation();
+    const [updateIndexOfCurrentQuestion] = useUpdateIndexOfCurrentQuestionMutation();
+    const [updateAmountOfCorrectAnswers] = useUpdateAmountOfCorrectAnswersMutation();
+    const [updateIsQuizStarted] = useUpdateIsQuizStartedMutation();
+    const [updateCheckSkipped] = useUpdateCheckSkippedMutation();
 
     const {
         data: difficulties,
@@ -21,9 +30,42 @@ const Start = () => {
         isError: areDifficultiesError
     } = useGetDifficultiesQuery();
 
+    const {
+        data: isQuizStarted,
+        isLoading: isQuizStartedLoading,
+        isError: isQuizStartedError
+    } = useGetIsQuizStartedQuery();
+
     const onSelect = (e) => {
         updateCurrentDifficulty({
             currentDifficulty: e.target.value
+        });
+        updateIsQuizStarted({
+            isQuizStarted: false
+        });
+        updateCheckSkipped({
+            checkSkipped: false
+        });
+        updateAmountOfCorrectAnswers({
+            amountOfCorrectAnswers: 0
+        });
+        updateIndexOfCurrentQuestion({
+            indexOfCurrentQuestion: 1
+        });
+    };
+
+    const onStart = () => {
+        updateIsQuizStarted({
+            isQuizStarted: true
+        });
+        updateCheckSkipped({
+            checkSkipped: false
+        });
+        updateAmountOfCorrectAnswers({
+            amountOfCorrectAnswers: 0
+        });
+        updateIndexOfCurrentQuestion({
+            indexOfCurrentQuestion: 1
         });
     };
 
@@ -57,6 +99,25 @@ const Start = () => {
             ? <ErrorMessage/> 
             : getDifficultiesView(difficulties);
 
+        const continueLinkView = isQuizStartedLoading
+            ? <Spinner/>
+            : isQuizStartedError 
+            ? <ErrorMessage/> 
+            : isQuizStarted 
+            ? 
+                <>
+                    <li className="start__links-item">
+                        <Link 
+                            className="
+                                start__links-link 
+                                button" 
+                            to="/quiz">
+                            Продолжить
+                        </Link>
+                    </li>
+                </>
+            : null;
+
         return (
             <>
                 <section className="start section">
@@ -70,15 +131,19 @@ const Start = () => {
                             {difficultiesView}
                         </div>
                         <p className="start__descr">Желаем удачи!</p>
-                        <div className="start__link-wrapper">
-                            <Link 
-                                className="
-                                    start__link 
-                                    button" 
-                                to="/quiz">
-                                Начать
-                            </Link>
-                        </div>
+                        <ul className="start__links">
+                            <li className="start__links-item">
+                                <Link 
+                                    className="
+                                        start__links-link 
+                                        button" 
+                                    to="/quiz"
+                                    onClick={onStart}>
+                                    Начать
+                                </Link>
+                            </li>
+                            {continueLinkView}
+                        </ul>
                     </div>
                 </section>
             </>

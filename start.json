@@ -122,6 +122,9 @@
     "answers": {
       "amountOfCorrectAnswers": 0
     },
+    "isQuizStarted": {
+      "isQuizStarted": false
+    },
     "isQuizOver": {
       "isQuizOver": false
     },

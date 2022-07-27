@@ -5,7 +5,7 @@ export const quizApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:3001'
     }),
-    tagTypes: ['Quiz', 'IndexOfCurrentQuestion', 'IsQuizOver', 'Difficulties', 'CurrentDifficulty', 'Questions', 'Question'],
+    tagTypes: ['Quiz', 'IndexOfCurrentQuestion', 'IsQuizStarted', 'IsQuizOver', 'Difficulties', 'CurrentDifficulty', 'Questions', 'Question'],
     endpoints: (builder) => ({
         getQuestions: builder.query({
             query: (difficulty) => `/${difficulty}`,
@@ -78,7 +78,7 @@ export const quizApi = createApi({
         getIsQuizOver: builder.query({
             query: () => `/isQuizOver`,
             transformResponse: (response) => response.isQuizOver,
-            providesTags: ['IsQuizOver']
+            providesTags: ['IsQuizStarted']
         }),
         updateIsQuizOver: builder.mutation({
             query: (data) => ({
@@ -86,7 +86,20 @@ export const quizApi = createApi({
                 method: 'PATCH',
                 body: data,
             }),
-            invalidatesTags: ['IsQuizOver']
+            invalidatesTags: ['IsQuizStarted']
+        }),
+        getIsQuizStarted: builder.query({
+            query: () => `/isQuizStarted`,
+            transformResponse: (response) => response.isQuizStarted,
+            providesTags: ['IsQuizStarted']
+        }),
+        updateIsQuizStarted: builder.mutation({
+            query: (data) => ({
+                url: '/isQuizStarted',
+                method: 'PATCH',
+                body: data,
+            }),
+            invalidatesTags: ['IsQuizStarted']
         }),
         getCheckSkipped: builder.query({
             query: () => `/checkSkipped`,
@@ -116,6 +129,8 @@ export const {
     useUpdateIndexOfCurrentQuestionMutation,
     useGetAmountOfCorrectAnswersQuery,
     useUpdateAmountOfCorrectAnswersMutation,
+    useGetIsQuizStartedQuery,
+    useUpdateIsQuizStartedMutation,
     useGetIsQuizOverQuery,
     useUpdateIsQuizOverMutation,
     useGetCheckSkippedQuery,

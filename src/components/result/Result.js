@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { 
     useGetDifficultiesQuery,
     useUpdateDifficultyMutation,
-    useGetCurrentDifficultyQuery
+    useGetCurrentDifficultyQuery,
+    useUpdateIsQuizStartedMutation
 } from '../../api/quizApi';
 
 import './result.sass';
@@ -12,6 +13,7 @@ const Result = ({amountOfCorrectAnswers, totalAmountOfQuestions, updateAmountOfC
     const {data: difficulties = []} = useGetDifficultiesQuery();
     const {data: currentDifficulty} = useGetCurrentDifficultyQuery();
     const [updateDifficulty] = useUpdateDifficultyMutation();
+    const [updateIsQuizStarted] = useUpdateIsQuizStartedMutation();
 
     const mediumDiffucultyData = difficulties.filter(difficulty => difficulty.name === 'Средний')[0];
     const hardDiffucultyData = difficulties.filter(difficulty => difficulty.name === 'Сложный')[0];
@@ -41,6 +43,9 @@ const Result = ({amountOfCorrectAnswers, totalAmountOfQuestions, updateAmountOfC
         });
         updateIndexOfCurrentQuestion({
             indexOfCurrentQuestion: 1
+        });
+        updateIsQuizStarted({
+            isQuizStarted: false
         });
         updateIsQuizOver({
             isQuizOver: false
