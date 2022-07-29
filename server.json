@@ -2,7 +2,6 @@
   "easy": [
     {
       "id": 1,
-      "indexNumber": 1,
       "description": "Описание легкого вопроса 1",
       "answers": [
         "Ответ 1",
@@ -15,7 +14,6 @@
     },
     {
       "id": 2,
-      "indexNumber": 2,
       "description": "Описание легкого вопроса 2",
       "answers": [
         "Ответ 1",
@@ -28,7 +26,6 @@
     },
     {
       "id": 3,
-      "indexNumber": 3,
       "description": "Описание легкого вопроса 3",
       "answers": [
         "Ответ 1",
@@ -38,12 +35,35 @@
       ],
       "correctAnswer": "Ответ 3",
       "skipped": false
+    },
+    {
+      "id": 4,
+      "description": "Описание легкого вопроса 4",
+      "answers": [
+        "Ответ 1",
+        "Ответ 2",
+        "Ответ 3",
+        "Ответ 4"
+      ],
+      "correctAnswer": "Ответ 4",
+      "skipped": false
+    },
+    {
+      "id": 5,
+      "description": "Описание легкого вопроса 5",
+      "answers": [
+        "Ответ 1",
+        "Ответ 2",
+        "Ответ 3",
+        "Ответ 4"
+      ],
+      "correctAnswer": "Ответ 1",
+      "skipped": false
     }
   ],
   "medium": [
     {
       "id": 1,
-      "indexNumber": 1,
       "description": "Описание среднего вопроса 1",
       "answers": [
         "Ответ 1",
@@ -56,7 +76,6 @@
     },
     {
       "id": 2,
-      "indexNumber": 2,
       "description": "Описание среднего вопроса 2",
       "answers": [
         "Ответ 1",
@@ -71,7 +90,6 @@
   "hard": [
     {
       "id": 1,
-      "indexNumber": 1,
       "description": "Описание сложного вопроса 1",
       "answers": [
         "Ответ 1",
@@ -84,7 +102,6 @@
     },
     {
       "id": 2,
-      "indexNumber": 2,
       "description": "Описание сложного вопроса 2",
       "answers": [
         "Ответ 1",
@@ -105,7 +122,7 @@
     {
       "id": 2,
       "name": "Средний",
-      "isAvailable": true
+      "isAvailable": false
     },
     {
       "id": 3,
@@ -123,7 +140,7 @@
     "amountOfCorrectAnswers": 0
   },
   "isQuizStarted": {
-    "isQuizStarted": false
+    "isQuizStarted": true
   },
   "isQuizOver": {
     "isQuizOver": false
