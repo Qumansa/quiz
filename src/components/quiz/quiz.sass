@@ -1,6 +1,10 @@
 @import '../../style/_variables'
     
 .question
+    &__header
+        display: flex
+        justify-content: space-between
+        column-gap: 30px
     &__counter
         display: flex
         align-items: center
@@ -24,6 +28,13 @@
     &__item
         border: 2px solid $brownRust
         border-radius: 5px
+        &-enter
+            transform: translateX(200px)
+            opacity: 0
+        &-enter-active
+            transform: translateX(200px)
+            opacity: 1
+            transition: opacity 1000ms
     &__radio
         &:checked + .answers__descr
             color: $sandyBeach
