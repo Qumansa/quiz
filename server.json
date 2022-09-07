@@ -2,366 +2,366 @@
   "easy": [
     {
       "id": 1,
-      "description": "Описание легкого вопроса 1",
+      "description": "Для чего предназначен тег doctype?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
+        "Для прикрепления в форме документов с типом .doc",
+        "Для указания версии HTML, которая используется в документе",
+        "Тег специально введён для медицинских сайтов для указания специальности доктора",
         "Ответ 4"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "Для указания версии HTML, которая используется в документе",
       "skipped": false
     },
     {
       "id": 2,
-      "description": "Описание легкого вопроса 2",
+      "description": "Какое число заголовков первого уровня считается допустимым?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "4",
+        "1",
+        "2",
+        "3"
       ],
-      "correctAnswer": "Ответ 2",
+      "correctAnswer": "1",
       "skipped": false
     },
     {
       "id": 3,
-      "description": "Описание легкого вопроса 3",
+      "description": "С помощью какого тега следует разделять абзацы?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "<span>",
+        "<b>",
+        "<p>",
+        "<br>"
       ],
-      "correctAnswer": "Ответ 3",
+      "correctAnswer": "<p>",
       "skipped": false
     },
     {
       "id": 4,
-      "description": "Описание легкого вопроса 4",
+      "description": "С помощью какого свойства таблицы можно убрать отступы между границами ячеек?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "clap",
+        "bold",
+        "border-collapse",
+        "shift"
       ],
-      "correctAnswer": "Ответ 4",
+      "correctAnswer": "border-collapse",
       "skipped": false
     },
     {
       "id": 5,
-      "description": "Описание легкого вопроса 5",
+      "description": "Как выделить текст курсивом?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "<p>курсив</p>",
+        "<em>курсив</em>",
+        "<c>курсив</c>",
+        "<hr>курсив</hr>"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "<em>курсив</em>",
       "skipped": false
     },
     {
       "id": 6,
-      "description": "Описание легкого вопроса 6",
+      "description": "Каким является следующий адрес ссылки: ./pages/page2.html",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "Относительным",
+        "Абсолютным",
+        "Смешанным",
+        "Уникальным"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "Относительным",
       "skipped": false
     },
     {
       "id": 7,
-      "description": "Описание легкого вопроса 7",
+      "description": "С помощью какого тега нужно задавать подписи к полям формы?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "label",
+        "id",
+        "type",
+        "field"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "label",
       "skipped": false
     },
     {
       "id": 8,
-      "description": "Описание легкого вопроса 8",
+      "description": "Как вставить картинку в HTML?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "<image>http://site.com/image.jpg</image>",
+        "<img src='http://site.com/image.jpg'>",
+        "<image source='http://site.com/image.jpg'>",
+        "<img>http://site.com/image.jpg</img>"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "<img src='http://site.com/image.jpg'>",
       "skipped": false
     },
     {
       "id": 9,
-      "description": "Описание легкого вопроса 9",
+      "description": "Какой тег при создании страницы не является обязательным?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "head",
+        "doctype",
+        "body",
+        "strong"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "strong",
       "skipped": false
     },
     {
       "id": 10,
-      "description": "Описание легкого вопроса 10",
+      "description": "С помощью какого атрибута можно задать текст для картинки, который будет отображен, если её не удастся загрузить?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "title",
+        "alt",
+        "popup",
+        "caption"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "alt",
       "skipped": false
     }
   ],
   "medium": [
     {
       "id": 1,
-      "description": "Описание среднего вопроса 1",
+      "description": "Расшифруйте аббревиатуру DOM",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "Document Object Model",
+        "Digital Optical Modulation",
+        "Domestic Object Mode",
+        "Document Object Module"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "Document Object Model",
       "skipped": false
     },
     {
       "id": 2,
-      "description": "Описание среднего вопроса 2",
+      "description": "Что выведет этот код? let y = 1; let x = y = 2; alert(x)",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "1",
+        "2",
+        "x",
+        "у = 2"
       ],
-      "correctAnswer": "Ответ 2",
+      "correctAnswer": "2",
       "skipped": false
     },
     {
       "id": 3,
-      "description": "Описание среднего вопроса 3",
+      "description": "Как объявить функцию в JavaScript?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "function:myFunction() {}",
+        "function myFunction() {}",
+        "function = myFunction() {}",
+        "function = New myFunction() {}"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "function myFunction() {}",
       "skipped": false
     },
     {
       "id": 4,
-      "description": "Описание среднего вопроса 4",
+      "description": "JSON - это...",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "JavaScript Object Notation",
+        "название следующей версии JavaScript",
+        "JavaScript Over Network",
+        "Название компании, создавшая JavaScript"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "JavaScript Object Notation",
       "skipped": false
     },
     {
       "id": 5,
-      "description": "Описание среднего вопроса 5",
+      "description": "Что будет записано в переменную test? const a = 5; const b = 5 != a ? 'Yes' : 'No'",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "Будет ошибка",
+        "5",
+        "'No'",
+        "'Yes'"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "'No'",
       "skipped": false
     },
     {
       "id": 6,
-      "description": "Описание среднего вопроса 6",
+      "description": "Какие циклы есть в языке JavaScript?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "for, forMap, foreach, while",
+        "for, while, do while",
+        "for, forMap, foreach, while, do while",
+        "for, while, do while, foreach"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "for, while, do while, foreach",
       "skipped": false
     },
     {
       "id": 7,
-      "description": "Описание среднего вопроса 7",
+      "description": "В чем разница между confirm и prompt?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "ничем не отличаются",
+        "confirm вызывает диалоговое окно с полем для ввода, prompt - окно с подтверждением",
+        "prompt вызывает диалоговое окно с полем для ввода, confirm - окно с подтверждением",
+        "confirm вызывает диалоговое окно с полем ввода, куда можно вводить только строки, prompt - строки и числа"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "prompt вызывает диалоговое окно с полем для ввода, confirm - окно с подтверждением",
       "skipped": false
     },
     {
       "id": 8,
-      "description": "Описание среднего вопроса 8",
+      "description": "Этот метод разбивает строку на подстроки, используя заданный разделитель, и возвращает их в виде массива.",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "filter()",
+        "split()",
+        "parseInt()",
+        "slice()"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "split()",
       "skipped": false
     },
     {
       "id": 9,
-      "description": "Описание среднего вопроса 9",
+      "description": "Метод, который округляет аргумент до ближайшего большего целого.",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "Math.asin()",
+        "Math.ceil()",
+        "Math.max()",
+        "Math.floor()"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "Math.ceil()",
       "skipped": false
     },
     {
       "id": 10,
-      "description": "Описание среднего вопроса 10",
+      "description": "Что такое замыкание в JavaScript?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "Это способность функции вызывать саму себя",
+        "Это способность функции запоминать все переменные",
+        "Это способность функции запоминать область видимости, в которой эта функция была объявлена",
+        "Это явление, когда функция вызвана внутри другой функции"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "Это способность функции запоминать область видимости, в которой эта функция была объявлена",
       "skipped": false
     }
   ],
   "hard": [
     {
       "id": 1,
-      "description": "Описание сложного вопроса 1",
+      "description": "React в основном используется для...",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "баз данных",
+        "подключения к серверу",
+        "создания пользовательского интерфейса",
+        "разработки платформы"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "создания пользовательского интерфейса",
       "skipped": false
     },
     {
       "id": 2,
-      "description": "Описание сложного вопроса 2",
+      "description": "Методы жизненного цикла в основном используются",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "для отслеживания истории событий",
+        "для расширения компонентов",
+        "для освобождения ресурсов",
+        "ничего из вышеперечисленного"
       ],
       "correctAnswer": "Ответ 2",
       "skipped": false
     },
     {
       "id": 3,
-      "description": "Описание сложного вопроса 3",
+      "description": "Какой атрибут обязателен при рендеринге компонентов списка?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "key",
+        "index",
+        "data-index",
+        "id"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "key",
       "skipped": false
     },
     {
       "id": 4,
-      "description": "Описание сложного вопроса 4",
+      "description": "Какой метод вызывается в React Component после того, как компонент отображается в первый раз?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "componentDidUpdate",
+        "componentDidMount",
+        "componentMounted",
+        "componentUpdated"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "componentDidMount",
       "skipped": false
     },
     {
       "id": 5,
-      "description": "Описание сложного вопроса 5",
+      "description": "Как создать встроенный стиль в JSX, указывая font-size:12px и color:red;",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "style={{font-size:12,color:'red'}}",
+        "style={{fontSize:'12px',color:'red'}}",
+        "style={fontSize:'12px',color:'red'}",
+        "style={{font-size:12px,color:'red'}}"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "style={{fontSize:'12px',color:'red'}}",
       "skipped": false
     },
     {
       "id": 6,
-      "description": "Описание сложного вопроса 6",
+      "description": "Каким образом можно получить доступ к функции fetch() из элемента h1 в JSX?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "${fetch()}",
+        "${fetch}",
+        "{fetch}",
+        "{fetch()}"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "{fetch()}",
       "skipped": false
     },
     {
       "id": 7,
-      "description": "Описание сложного вопроса 7",
+      "description": "Какой из нижеприведенных вариантов используется для передачи данных компоненту 'извне'?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "render-функция с аргументами",
+        "props",
+        "setState",
+        "PropTypes"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "props",
       "skipped": false
     },
     {
       "id": 8,
-      "description": "Описание сложного вопроса 8",
+      "description": "Что происходит при вызове setState() внутри метода render()?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "Повторяющаяся ошибка ключа",
+        "На экране появятся повторяющиеся выходные данные",
+        "Ошибка переполнения стека",
+        "Ничего не произойдет"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "Ошибка переполнения стека",
       "skipped": false
     },
     {
       "id": 9,
-      "description": "Описание сложного вопроса 9",
+      "description": "Кто является основателем React.js?",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "Google",
+        "Twitter",
+        "Microsoft",
+        "Facebook"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "Facebook",
       "skipped": false
     },
     {
       "id": 10,
-      "description": "Описание сложного вопроса 10",
+      "description": "Какой из предложенных вариантов использования хука useEffect() реализует метод жизненного цикла componentDidUpdate:",
       "answers": [
-        "Ответ 1",
-        "Ответ 2",
-        "Ответ 3",
-        "Ответ 4"
+        "useEffect(() => { … исполняемый код }, []);",
+        "useEffect(() => { … исполняемый код return(() => { … исполняемый код }); }, []);",
+        "useEffect(() => { … исполняемый код зависящий от переменной value }, [value]);",
+        "Ни один из перечисленных"
       ],
-      "correctAnswer": "Ответ 1",
+      "correctAnswer": "useEffect(() => { … исполняемый код }, []);",
       "skipped": false
     }
   ],
@@ -374,7 +374,7 @@
     {
       "id": 2,
       "name": "Средний",
-      "isAvailable": false
+      "isAvailable": true
     },
     {
       "id": 3,
@@ -383,10 +383,10 @@
     }
   ],
   "currentDifficulty": {
-    "currentDifficulty": "Легкий"
+    "currentDifficulty": "Средний"
   },
   "indexOfCurrentQuestion": {
-    "indexOfCurrentQuestion": 1
+    "indexOfCurrentQuestion": 2
   },
   "answers": {
     "amountOfCorrectAnswers": 0
