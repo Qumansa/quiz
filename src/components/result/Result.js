@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'; 
 
 import { 
@@ -19,22 +20,6 @@ const Result = ({amountOfCorrectAnswers, totalAmountOfQuestions, updateAmountOfC
     const hardDiffucultyData = difficulties.filter(difficulty => difficulty.name === 'Сложный')[0];
 
     const onReset = () => {
-        if (amountOfCorrectAnswers === totalAmountOfQuestions) {
-            if (currentDifficulty === 'Легкий' && !mediumDiffucultyData?.isAvailable) {
-                updateDifficulty({
-                    id: mediumDiffucultyData.id,
-                    isAvailable: true
-                });
-            } 
-
-            if (currentDifficulty === 'Средний' && !hardDiffucultyData?.isAvailable) {
-                updateDifficulty({
-                    id: hardDiffucultyData.id,
-                    isAvailable: true
-                });
-            } 
-        }
-
         updateCheckSkipped({
             checkSkipped: false
         });
@@ -52,7 +37,40 @@ const Result = ({amountOfCorrectAnswers, totalAmountOfQuestions, updateAmountOfC
         });
     };
 
+    const commentView = amountOfCorrectAnswers <= 3
+        ? 'Вы показали плохой результат! Возможно, вы совсем не знакомы с основами веб-разработки или только начинаете с ними работать. Вам стоит подтянуть свои знания и попробовать снова!'
+        : amountOfCorrectAnswers >= 4 && amountOfCorrectAnswers <= 7
+        ? 'Вы показали средний результат, однако не стоит останавливаться на достигнутом! Читайте статьи и используйте полученные знания на практике, чтобы эффективнее развиваться в качестве веб-разработчика.'
+        : amountOfCorrectAnswers >= 8 
+        ? 'Поздравляем, у вас отличный результат! Вы отлично разбираетесь в основах веб-разработки и умеете использовать свои знания на практике. Продолжайте в том же духе!'
+        : 'Произошла ошибка! Пожалуйста, попробуйте позже.';
+
+    const unblockingView = useRef(null);
+
+    useEffect(() => {
+        if (amountOfCorrectAnswers >= 8) {
+            if (currentDifficulty === 'Легкий' && !mediumDiffucultyData?.isAvailable) {
+                updateDifficulty({
+                    id: mediumDiffucultyData.id,
+                    isAvailable: true
+                });
+    
+                unblockingView.current = <p className="result__unblocking">Вы разблокировали средний уровень сложности!</p>;
+            } 
+    
+            if (currentDifficulty === 'Средний' && !hardDiffucultyData?.isAvailable && hardDiffucultyData) {
+                updateDifficulty({
+                    id: hardDiffucultyData.id,
+                    isAvailable: true
+                });
+    
+                unblockingView.current = <p className="result__unblocking">Вы разблокировали сложный уровень сложности!</p>;
+            } 
+        }
+    }, [amountOfCorrectAnswers, currentDifficulty, mediumDiffucultyData, hardDiffucultyData, totalAmountOfQuestions, updateDifficulty]);
+
     return (
+        
         <>
             <section className="result section">
                 <div className="container">
@@ -60,6 +78,10 @@ const Result = ({amountOfCorrectAnswers, totalAmountOfQuestions, updateAmountOfC
                     <div className="result__score">
                         {amountOfCorrectAnswers} / {totalAmountOfQuestions} 
                     </div>
+                    <p className="result__comment">
+                        {commentView}
+                    </p>
+                    {unblockingView.current}
                     <div className="result__button-wrapper">
                         <Link 
                             className="result__button button" 

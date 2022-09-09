@@ -374,16 +374,16 @@
     {
       "id": 2,
       "name": "Средний",
-      "isAvailable": true
+      "isAvailable": false
     },
     {
       "id": 3,
       "name": "Сложный",
-      "isAvailable": true
+      "isAvailable": false
     }
   ],
   "currentDifficulty": {
-    "currentDifficulty": "Сложный"
+    "currentDifficulty": "Легкий"
   },
   "indexOfCurrentQuestion": {
     "indexOfCurrentQuestion": 1
