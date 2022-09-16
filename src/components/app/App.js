@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 import MainPage from "../pages/MainPage";
 import QuizPage from "../pages/QuizPage";
-import Page404 from "../pages/404";
+import Page404 from "../pages/Page404";
 
 import '../../style/_base.sass';
 
